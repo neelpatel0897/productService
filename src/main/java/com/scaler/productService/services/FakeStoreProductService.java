@@ -115,7 +115,7 @@ public class FakeStoreProductService implements ProductService {
                 new HttpMessageConverterExtractor<>(FakeStoreProductDto.class,
                         restTemplate.getMessageConverters());
         FakeStoreProductDto response =
-                restTemplate.execute("https://fakestoreapi.com/products/" + id, HttpMethod.PUT, requestCallback, responseExtractor);
+                restTemplate.execute(productsRequestURL + id, HttpMethod.PUT, requestCallback, responseExtractor);
 
         return convertFakeStoreDtoToProduct(response);
     }

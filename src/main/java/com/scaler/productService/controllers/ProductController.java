@@ -20,7 +20,7 @@ import com.scaler.productService.services.ProductService;
 
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("api/v1")
 public class ProductController {
 
     //Field Injection
@@ -39,27 +39,27 @@ public class ProductController {
     //     this.productService = productService;
     // }
 
-    @GetMapping()
+    @GetMapping("/products")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable("id")Long id) throws ProductNotFoundException{
         return productService.getProductById(id);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<Product> deleteProductById(@PathVariable("id")Long id) throws ProductNotFoundException{
         return new ResponseEntity<Product>(productService.deleteProduct(id),HttpStatus.NOT_FOUND);
 
     }
     
-    @PostMapping
+    @PostMapping("/products")
     public Product createProduct(@RequestBody Product product) { // can use DTO as well.
         return productService.createProduct(product);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/products/{id}")
     public Product updateProductById(@RequestBody Product product,@PathVariable("id")Long id){
         return productService.updateProduct(id,product);
 
